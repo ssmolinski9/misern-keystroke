@@ -1,8 +1,8 @@
-package com.misern.fingerprint.dao.impl;
+package com.misern.keystroke.dao.impl;
 
-import com.misern.fingerprint.dao.SampleDAO;
-import com.misern.fingerprint.model.Sample;
-import com.misern.fingerprint.utils.ConnectionFactory;
+import com.misern.keystroke.dao.SampleDAO;
+import com.misern.keystroke.model.Sample;
+import com.misern.keystroke.utils.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

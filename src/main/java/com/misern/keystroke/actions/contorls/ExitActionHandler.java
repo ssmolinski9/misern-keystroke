@@ -1,6 +1,6 @@
-package com.misern.fingerprint.actions.contorls;
+package com.misern.keystroke.actions.contorls;
 
-import com.misern.fingerprint.ui.Dashboard;
+import com.misern.keystroke.ui.Dashboard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

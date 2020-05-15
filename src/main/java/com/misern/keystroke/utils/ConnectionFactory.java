@@ -1,4 +1,4 @@
-package com.misern.fingerprint.utils;
+package com.misern.keystroke.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

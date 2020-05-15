@@ -1,4 +1,4 @@
-package com.misern.fingerprint.ui;
+package com.misern.keystroke.ui;
 
 import javax.swing.*;
 import java.awt.*;

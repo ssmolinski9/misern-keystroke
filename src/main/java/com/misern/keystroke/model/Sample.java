@@ -1,4 +1,4 @@
-package com.misern.fingerprint.model;
+package com.misern.keystroke.model;
 
 
 import lombok.*;

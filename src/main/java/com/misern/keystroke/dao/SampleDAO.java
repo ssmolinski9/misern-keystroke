@@ -1,6 +1,6 @@
-package com.misern.fingerprint.dao;
+package com.misern.keystroke.dao;
 
-import com.misern.fingerprint.model.Sample;
+import com.misern.keystroke.model.Sample;
 
 import java.util.List;
 
