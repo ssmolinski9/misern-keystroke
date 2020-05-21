@@ -8,14 +8,19 @@ import com.misern.keystroke.dao.impl.SampleDAOImpl;
 import com.misern.keystroke.model.Sample;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class Dashboard extends JFrame {
 
@@ -23,6 +28,7 @@ public class Dashboard extends JFrame {
 
     private final JMenuItem exitItem = new JMenuItem("Exit");
     private final JButton addVector = new JButton("Add vector");
+    private final JButton computeQuality = new JButton("System quality");
     private final JList<Sample> samples = new JList<>();
 
     public Dashboard() {
@@ -35,8 +41,20 @@ public class Dashboard extends JFrame {
         createActionListeners();
         getVectors();
 
-        add(samples, BorderLayout.CENTER);
-        add(addVector, BorderLayout.SOUTH);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(samples);
+        samples.setLayoutOrientation(JList.VERTICAL_WRAP);
+
+        add(scrollPane, BorderLayout.CENTER);
+
+        JPanel buttonsPanel = new JPanel(new GridLayout(1, 4));
+
+        buttonsPanel.add(new JLabel(""));
+        buttonsPanel.add(addVector);
+        buttonsPanel.add(computeQuality);
+        buttonsPanel.add(new JLabel(""));
+
+        add(buttonsPanel, BorderLayout.SOUTH);
         setVisible(true);
     }
 

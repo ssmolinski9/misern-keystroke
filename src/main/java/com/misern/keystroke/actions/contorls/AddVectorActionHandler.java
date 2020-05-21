@@ -32,7 +32,7 @@ public class AddVectorActionHandler implements ActionListener {
     private final JButton confirm = new JButton("Confirm");
 
     private JDialog inputDialog;
-    private List<Long> times = new ArrayList<>();
+    private final List<Long> times = new ArrayList<>();
 
     public AddVectorActionHandler(Dashboard dashboard) {
         this.dashboard = dashboard;
@@ -45,7 +45,6 @@ public class AddVectorActionHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         inputDialog = new JDialog(dashboard, "Create vector", true);
-
 
         inputDialog.getContentPane().add(createVectorPanel);
         inputDialog.setSize(new Dimension(400, 300));
@@ -98,6 +97,8 @@ public class AddVectorActionHandler implements ActionListener {
             } else {
                 saveSample();
                 dashboard.getVectors();
+                times.clear();
+                inputArea.setText("");
                 inputDialog.dispose();
             }
         });

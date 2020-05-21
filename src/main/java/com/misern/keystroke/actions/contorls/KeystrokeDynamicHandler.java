@@ -6,7 +6,8 @@ import java.util.List;
 
 public class KeystrokeDynamicHandler implements KeyListener {
 
-    private int lastCode = -1;
+    private final String statement = "Example statement for recognition purposes".toLowerCase();
+
     private long timeLast = -1;
 
     private final List<Long> times;
@@ -20,16 +21,21 @@ public class KeystrokeDynamicHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        lastCode = e.getKeyCode();
         timeLast = System.currentTimeMillis();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(lastCode != -1) {
+        if (times.size() > statement.length()) {
+            return;
+        }
+
+        int keyCode = Character.toLowerCase(e.getKeyChar());
+        if(keyCode != 27 && keyCode == statement.charAt(times.size())) {
             long measuredTime = System.currentTimeMillis() - timeLast;
             times.add(measuredTime);
-            //System.out.println(String.format("Code: %d, time %d", lastCode, measuredTime));
+
+            System.out.println(String.format("time %d", measuredTime));
         }
     }
 }
