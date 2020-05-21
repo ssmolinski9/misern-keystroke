@@ -5,9 +5,6 @@ import com.misern.keystroke.ui.Dashboard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Handler for exit program action, just disposes dashboard view and exits application
- */
 public class ExitActionHandler implements ActionListener {
     private final Dashboard dashboard;
 

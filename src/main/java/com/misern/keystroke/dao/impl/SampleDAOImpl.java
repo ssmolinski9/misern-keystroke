@@ -13,43 +13,53 @@ import java.util.List;
 
 public class SampleDAOImpl implements SampleDAO {
 	@Override
-	public void save(Sample sample) {
-		final String SQL = "insert into sample (lasttime, measuredtime, username) values (?,?,?)";
-		try (Connection conn = ConnectionFactory.getConnection();
-			 PreparedStatement statement = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			ResultSet rs = statement.getGeneratedKeys();
-			statement.setDouble(1, sample.getLastTime());
-			statement.setDouble(2, sample.getMeasuredTime());
-			statement.setString(3, sample.getUserName());
-			statement.executeUpdate();
+	public void save(Sample sample) throws ClassNotFoundException, SQLException {
+		final String SQL = "INSERT INTO SAMPLES (times, username) values (?,?)";
+		Connection conn = ConnectionFactory.getConnection();
+		PreparedStatement statement = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
+		statement.getGeneratedKeys();
+		statement.setString(1, sample.getTimes());
+		statement.setString(2, sample.getUserName());
+		statement.executeUpdate();
 	}
 
 	@Override
-	public List<Sample> findByUserName(String userName) {
-		final String SQL = "select * from sample where username = ?";
-		List<Sample> result = new ArrayList<>();
-		try (Connection conn = ConnectionFactory.getConnection();
-			 PreparedStatement statement = conn.prepareStatement(SQL)) {
-			statement.setString(1, userName);
+	public List<Sample> findByUserName(String userName) throws SQLException, ClassNotFoundException {
+		final String SQL = "SELECT * FROM SAMPLES data WHERE data.username = ?";
 
-			try (ResultSet rs = statement.executeQuery()) {
-				while (rs.next()) {
-					result.add(Sample.builder()
-							.id(rs.getLong(1))
-							.lastTime(rs.getDouble(2))
-							.measuredTime(rs.getDouble(3))
-							.userName(rs.getString(4)).build());
-				}
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		List<Sample> result = new ArrayList<>();
+		Connection conn = ConnectionFactory.getConnection();
+		PreparedStatement statement = conn.prepareStatement(SQL);
+		statement.setString(1, userName);
+
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()) {
+			result.add(Sample.builder()
+					.id(rs.getLong(1))
+					.times(rs.getString(2))
+					.userName(rs.getString(3)).build());
 		}
+
+		return result;
+	}
+
+	@Override
+	public java.util.List<Sample> findAll() throws SQLException, ClassNotFoundException {
+		final String SQL = "SELECT * FROM SAMPLES data";
+
+		List<Sample> result = new ArrayList<>();
+		Connection conn = ConnectionFactory.getConnection();
+		PreparedStatement statement = conn.prepareStatement(SQL);
+
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()) {
+			result.add(Sample.builder()
+					.id(rs.getLong(1))
+					.times(rs.getString(2))
+					.userName(rs.getString(3)).build());
+		}
+
 		return result;
 	}
 }
