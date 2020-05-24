@@ -3,6 +3,7 @@ package com.misern.keystroke.ui;
 import com.misern.keystroke.actions.contorls.AddVectorActionHandler;
 import com.misern.keystroke.actions.contorls.ExitActionHandler;
 
+import com.misern.keystroke.actions.contorls.SystemQualityActionHandler;
 import com.misern.keystroke.dao.SampleDAO;
 import com.misern.keystroke.dao.impl.SampleDAOImpl;
 import com.misern.keystroke.model.Sample;
@@ -71,6 +72,7 @@ public class Dashboard extends JFrame {
     private void createActionListeners() {
         exitItem.addActionListener(new ExitActionHandler(this));
         addVector.addActionListener(new AddVectorActionHandler(this));
+        computeQuality.addActionListener(new SystemQualityActionHandler(this));
     }
 
     public void getVectors() {

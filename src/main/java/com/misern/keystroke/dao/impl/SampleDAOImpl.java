@@ -62,4 +62,21 @@ public class SampleDAOImpl implements SampleDAO {
 
 		return result;
 	}
+
+	@Override
+	public List<String> findAllUsers() throws SQLException, ClassNotFoundException {
+		final String SQL = "SELECT DISTINCT data.username FROM SAMPLES data";
+
+		List<String> result = new ArrayList<>();
+		Connection conn = ConnectionFactory.getConnection();
+		PreparedStatement statement = conn.prepareStatement(SQL);
+
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()) {
+			result.add(rs.getString(1));
+		}
+
+		return result;
+	}
+
 }
